@@ -1,18 +1,48 @@
 import React from "react";
-import NavBar from "./components/NavBar";
-import Hero from "./components/Hero";
-import HomeCards from "./components/HomeCards";
-import JobListings from "./components/JobListings";
-import ViewAllJobs from "./components/ViewAllJobs";
+
+// Import Layouts here
+import MainLayout from "./layouts/MainLayout";
+
+// Import Pages here
+import HomePage from "./pages/HomePage";
+import JobsPage from "./pages/JobsPage";
+
+// React router
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter(
+  // example of routing #1
+  // createRoutesFromElements(<Route index element={<HomePage />} />)
+
+  // example of routing #2
+  // if say suppose you want to show a path in route and redirect there
+  // createRoutesFromElements(<Route path="/about" element={<h1>My App</h1>} />)
+
+  // example of routing #3
+  // Having parent route for layout and other routes
+  createRoutesFromElements(
+    <Route path="/" element={<MainLayout />}>
+      {/* Parent Route beings*/}
+      <Route index element={<HomePage />} />
+      <Route path="/jobs" element={<JobsPage />} />
+    </Route>
+  )
+);
 
 const App = () => {
   return (
     <>
-      <NavBar />
+      <RouterProvider router={router} />
+      {/* <NavBar />
       <Hero />
       <HomeCards />
       <JobListings />
-      <ViewAllJobs />
+      <ViewAllJobs /> */}
     </>
   );
 };
